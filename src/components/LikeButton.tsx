@@ -11,6 +11,7 @@ const LikeButton: FC = () => {
     //         {onOff ? 'ON' : 'OFF'}
     //     </button>
     // </>
+
     const [obj, setObj] = useState({ like: 0, on: false })
     const likeRef = useRef(0)
     const iptRef = useRef<HTMLInputElement>(null)
