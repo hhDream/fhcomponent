@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Fenghua Zhang
  * @Date: 2021-01-20 10:39:36
- * @LastEditTime: 2021-01-25 14:29:53
+ * @LastEditTime: 2021-02-20 16:41:07
  * @LastEditors: Fenghua Zhang
  */
 import classNames from 'classnames';
@@ -27,6 +27,7 @@ interface BaseButtonProps {
     btnType?: ButtonType;
     children?: React.ReactNode;
     href?: string;
+    onClick?: (e: any) => any;
 }
 
 const Button: React.FC<BaseButtonProps> = (props) => {
@@ -35,7 +36,8 @@ const Button: React.FC<BaseButtonProps> = (props) => {
         disabled,
         size,
         children,
-        href
+        href,
+        onClick
     } = props
     const classes = classNames('btn', {
         [`btn-${btnType}`]: btnType,
@@ -56,6 +58,7 @@ const Button: React.FC<BaseButtonProps> = (props) => {
             <button
                 className={classes}
                 disabled={disabled}
+                onClick={onClick}
             >
                 {children}
             </button>
