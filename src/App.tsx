@@ -2,24 +2,51 @@
  * @Description: 
  * @Author: Fenghua Zhang
  * @Date: 2020-12-04 15:54:21
- * @LastEditTime: 2021-02-20 16:40:31
+ * @LastEditTime: 2021-03-04 16:48:30
  * @LastEditors: Fenghua Zhang
  */
 import React from 'react';
-import Button, { ButtonType, ButtonSize } from './components/Button/button';
+import { BrowserRouter as Router, Route, Switch, Redirect, RouteProps } from 'react-router-dom';
 import './styles/index.scss'
+import Home from './pages/home';
+import ButtonPage from './pages/buttonPage';
+import LayoutMaster from './layouts/LayoutMaster';
+import Login from './pages/login/login';
 
-function App(this: any) {
-    const handleClick = (e) => {
-        console.log(e.target)
-    }
+const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
+    return <Route
+        render={(location) => {
+            localStorage.isLogin ? (<LayoutMaster>{children}</LayoutMaster>) : (
+                <Redirect
+                    to={
+                        {
+                            pathname: "/login",
+                            state: { from: location }
+                        }
+                    }
+                >
+
+                </Redirect>
+            )
+        }}
+    ></Route>
+}
+
+const App: React.FC = () => {
     return (
-        <div className="App">
-            <Button>按钮</Button>
-            <Button onClick={() => { handleClick }} btnType={ButtonType.Primary}>按钮2</Button>
-            <Button btnType={ButtonType.Primary} disabled size={ButtonSize.Large}>按钮2</Button>
-            <Button btnType={ButtonType.Link} href="https://wwww.baidu.com">我是百度</Button>
-        </div>
+        <Router>
+            <Switch>
+                <PrivateRoute path="/home">
+                    <Home />
+                </PrivateRoute>
+                <PrivateRoute path="/buttonPage">
+                    <ButtonPage />
+                </PrivateRoute>
+                <Route path="/" >
+                    <Login></Login>
+                </Route>
+            </Switch>
+        </Router>
     );
 }
 

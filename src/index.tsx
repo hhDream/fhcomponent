@@ -1,13 +1,22 @@
+/*
+ * @Description: 
+ * @Author: Fenghua Zhang
+ * @Date: 2021-03-03 15:25:10
+ * @LastEditTime: 2021-03-05 11:00:08
+ * @LastEditors: Fenghua Zhang
+ */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
+import 'antd/dist/antd.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/lib/locale/zh_CN';
 ReactDOM.render(
-    <React.StrictMode>
+    <ConfigProvider locale={zhCN}>
         <App />
-    </React.StrictMode>,
+    </ConfigProvider>,
     document.getElementById('root')
 );
 
