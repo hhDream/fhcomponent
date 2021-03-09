@@ -1,12 +1,12 @@
 import Axios from 'axios';
 import { auth } from '../stores/auth.store';
 import { message } from 'antd';
-
+const baseURL = process.env.NODE_ENV === "development" ? 'http://127.0.0.1:7001/' : ''
 const request = Axios.create({
-    baseURL: process.env.BASE_URL,
+    baseURL: baseURL,
     timeout: 5000
 });
-console.log("🚀 ~ file: request.service.ts ~ line 9 ~ process.env.BASE_URL", process.env)
+console.log("🚀 ~ file: request.service.ts ~ line 9 ~ process.env.BASE_URL", baseURL)
 
 request.interceptors.request.use(
     (config) => {
@@ -26,7 +26,7 @@ request.interceptors.response.use(
         if (response.status === 200) {
             // 处理错误提示
             if (response.data.code !== 0) {
-                message.error(response.data.msg);
+                message.error(response.data.message);
             }
         }
 
@@ -52,7 +52,7 @@ request.interceptors.response.use(
             case 401:
             case 403:
             default:
-                message.error(error.response.data.msg);
+                message.error(error.response.data.message);
                 break;
         }
     }

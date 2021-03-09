@@ -15,7 +15,7 @@ export interface LoginViweModel {
 }
 
 export function loginAsync(userName: string, passWord: string): Promise<AxiosResponse<ResponseViewModel<LoginViweModel>>> {
-    return Axios.post('/login', {
+    return request.post('/login', {
         userName,
         passWord
     });
