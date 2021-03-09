@@ -1,11 +1,24 @@
 
-import React from 'react';
-import { Layout, message } from 'antd';
-import LoginForm from './components/LoginForm'
-import './login.css'
+import React, { useContext, useEffect, useRef } from 'react';
+import { Layout, notification } from 'antd';
+import LoginForm from './components/LoginForm';
+import authContext from '../../stores/auth.store';
+import './login.css';
 const Login: React.FC = () => {
-    const onFinish = () => {
-        message.success('登录成功')
+    const auth = useRef(useContext(authContext));
+    const onFinish = (values: any) => {
+        const { username, password, remember } = values;
+        auth.current
+            .loginAsync(username, password, remember)
+            .then(() => {
+                // onLogin();
+            })
+            .catch((e) => {
+                notification['error']({
+                    message: '登录失败',
+                    description: e.message
+                });
+            });
     }
     return (
         <Layout>
