@@ -3,15 +3,33 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Layout, notification } from 'antd';
 import LoginForm from './components/LoginForm';
 import authContext from '../../stores/auth.store';
-import './login.css';
+import { useHistory, useLocation } from 'react-router';
+import './login.scss';
 const Login: React.FC = () => {
     const auth = useRef(useContext(authContext));
+    const history = useRef(useHistory());
+    const location = useRef(useLocation());
+
+    const onLogin = () => {
+        if (auth.current.isLogined) {
+            history.current.push('/')
+        }
+    }
+
+    useEffect(() => {
+        console.log(location.current);
+        auth.current.refreshTokenAsync().then(() => {
+            onLogin()
+        })
+    }, [])
+
     const onFinish = (values: any) => {
         const { username, password, remember } = values;
         auth.current
             .loginAsync(username, password, remember)
             .then(() => {
-                // onLogin();
+                onLogin();
+                console.log("🚀 ~ file: login.tsx ~ line 33 ~ .then ~ auth", auth.current.userInfo.id)
             })
             .catch((e) => {
                 notification['error']({
@@ -20,6 +38,8 @@ const Login: React.FC = () => {
                 });
             });
     }
+
+
     return (
         <Layout>
             <Layout.Content className="antd-pro-layouts-user-layout-container">

@@ -12,42 +12,46 @@ import Home from './pages/home';
 import ButtonPage from './pages/buttonPage';
 import LayoutMaster from './layouts/LayoutMaster';
 import Login from './pages/login/login';
+import authContext from './stores/auth.store';
+import { useContext } from 'react';
+import { observer } from 'mobx-react';
+const PrivateRoute: React.FC<RouteProps> = observer(({ children, ...rest }) => {
+    const auth = useContext(authContext);
 
-const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
-    return <Route
-        render={(location) => {
-            localStorage.isLogin ? (<LayoutMaster>{children}</LayoutMaster>) : (
-                <Redirect
-                    to={
-                        {
-                            pathname: "/login",
+    return (
+        <Route
+            {...rest}
+            render={({ location }) =>
+                auth.isLogined ? (
+                    <LayoutMaster>{children}</LayoutMaster>
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: '/login',
                             state: { from: location }
-                        }
-                    }
-                >
-
-                </Redirect>
-            )
-        }}
-    ></Route>
-}
+                        }}
+                    />
+                )}
+        />
+    );
+});
 
 const App: React.FC = () => {
     return (
         <Router>
             <Switch>
-                <PrivateRoute path="/home">
+                <PrivateRoute exact path="/">
                     <Home />
                 </PrivateRoute>
                 <PrivateRoute path="/buttonPage">
                     <ButtonPage />
                 </PrivateRoute>
-                <Route path="/" >
-                    <Login></Login>
+                <Route path="/login">
+                    <Login />
                 </Route>
             </Switch>
         </Router>
     );
-}
+};
 
 export default App;

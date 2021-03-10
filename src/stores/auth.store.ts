@@ -16,8 +16,8 @@ export class AuthStore {
         this.isLogined = true;
     }
 
-    async loginAsync(userName: string, passWord: string, remember: boolean = true) {
-        const response = await loginAsync(userName, passWord);
+    async loginAsync(username: string, password: string, remember: boolean = true) {
+        const response = await loginAsync(username, password);
         if (response && response.data.code === 0) {
             this.setLogin(response.data.data);
         }

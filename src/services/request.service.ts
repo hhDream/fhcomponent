@@ -1,12 +1,17 @@
+/*
+ * @Description: 
+ * @Author: Fenghua Zhang
+ * @Date: 2021-03-10 09:06:01
+ * @LastEditTime: 2021-03-10 10:42:09
+ * @LastEditors: Fenghua Zhang
+ */
 import Axios from 'axios';
 import { auth } from '../stores/auth.store';
 import { message } from 'antd';
-const baseURL = process.env.NODE_ENV === "development" ? 'http://127.0.0.1:7001/' : ''
 const request = Axios.create({
-    baseURL: baseURL,
+    baseURL: process.env.REACT_APP_BASE_URL,
     timeout: 5000
 });
-console.log("🚀 ~ file: request.service.ts ~ line 9 ~ process.env.BASE_URL", baseURL)
 
 request.interceptors.request.use(
     (config) => {

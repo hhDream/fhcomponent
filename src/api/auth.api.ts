@@ -1,6 +1,5 @@
 import request from '../services/request.service';
 import { AxiosResponse } from 'axios';
-import Axios from 'axios';
 
 export interface ResponseViewModel<T> {
     code: number;
@@ -12,12 +11,13 @@ export interface LoginViweModel {
     username: string;
     token: string;
     roles: string[];
+    id: number;
 }
 
-export function loginAsync(userName: string, passWord: string): Promise<AxiosResponse<ResponseViewModel<LoginViweModel>>> {
+export function loginAsync(username: string, password: string): Promise<AxiosResponse<ResponseViewModel<LoginViweModel>>> {
     return request.post('/login', {
-        userName,
-        passWord
+        username,
+        password
     });
 }
 

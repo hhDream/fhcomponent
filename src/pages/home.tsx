@@ -6,11 +6,16 @@
  * @LastEditors: Fenghua Zhang
  */
 import React from 'react';
+import authContext from './../stores/auth.store';
+import { useContext } from 'react';
 
 const Home: React.FC = () => {
+
+    const auth = useContext(authContext)
     return (<div>
         我是home
         <a href='/buttonPage'>buttonPage</a >
+        <input type="text" value={auth.isLogined.toString()} />
     </div>)
 
 }
