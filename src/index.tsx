@@ -2,10 +2,9 @@
  * @Description: 
  * @Author: Fenghua Zhang
  * @Date: 2021-03-03 15:25:10
- * @LastEditTime: 2021-03-05 11:00:08
+ * @LastEditTime: 2021-03-11 14:49:18
  * @LastEditors: Fenghua Zhang
  */
-import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
 import 'antd/dist/antd.css';

@@ -1,0 +1,43 @@
+.components-layout-demo-custom-trigger {
+    .trigger {
+        font-size: 18px;
+        line-height: 64px;
+        padding: 0 24px;
+        cursor: pointer;
+        transition: color 0.3s;
+        &:hover {
+            color: #1890ff;
+        }
+    }
+    .logo {
+        height: 32px;
+        background: rgba(255, 255, 255, 0.2);
+        margin: 16px;
+    }
+    .layout-header {
+        position: relative;
+        .user-tool-box {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            .user-avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+            .user-name {
+                cursor: pointer;
+            }
+        }
+        .layout-breadcrumb {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 76px;
+        }
+    }
+}
