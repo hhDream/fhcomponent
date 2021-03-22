@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: Fenghua Zhang
  * @Date: 2021-03-08 09:10:07
- * @LastEditTime: 2021-03-11 18:09:04
+ * @LastEditTime: 2021-03-15 14:58:15
  * @LastEditors: Fenghua Zhang
  */
 import React from 'react';
@@ -21,16 +21,16 @@ const LayoutMaster: React.FC = (props) => {
     const onTrigger = () => {
         setCollapsed(!collapsed);
     };
-    const breadcrumbNameMap = {
-        '/': '首页',
-        '/buttonPage': '按钮'
-    };
+    // const breadcrumbNameMap = {
+    //     '/': '首页',
+    //     '/buttonPage': '按钮'
+    // };
     const pathSnippets = location.pathname.split('/').filter(i => i);
     const extraBreadcrumbItems = pathSnippets.map((_, index) => {
         const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
         return (
             <Breadcrumb.Item key={url}>
-                <Link to={url}>{breadcrumbNameMap[url]}</Link>
+                <Link to={url}>{url.replace('/', '')}</Link>
             </Breadcrumb.Item>
         );
     });

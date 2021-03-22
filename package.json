@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/webpack-env": "^1.16.0",
     "env-cmd": "^10.1.0",
     "progress-bar-webpack-plugin": "^2.1.0",
     "react-app-rewired": "^2.1.8"

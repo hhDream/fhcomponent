@@ -3,4 +3,9 @@
 
 @import './mixin'; // 复用方法
 
-@import '../components/Button/style'
+@import '../components/Button/style';
+
+
+.ant-btn{
+    margin-right: 10px;
+}
