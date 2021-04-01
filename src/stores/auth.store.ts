@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Fenghua Zhang
  * @Date: 2021-03-09 16:27:23
- * @LastEditTime: 2021-03-22 11:28:20
+ * @LastEditTime: 2021-03-26 10:45:31
  * @LastEditors: Fenghua Zhang
  */
 import { makeAutoObservable } from "mobx";
@@ -29,7 +29,6 @@ export class AuthStore {
     remember: boolean = true
   ) {
     const response = await loginAsync(username, password);
-
     if (response && response.code === 0) {
       this.setLogin(response.data);
     }

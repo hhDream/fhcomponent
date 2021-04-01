@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Fenghua Zhang
  * @Date: 2021-03-10 09:06:01
- * @LastEditTime: 2021-03-22 11:36:19
+ * @LastEditTime: 2021-03-31 14:55:10
  * @LastEditors: Fenghua Zhang
  */
 import Axios from "axios";
@@ -16,7 +16,7 @@ const request = Axios.create({
 request.interceptors.request.use(
   (config) => {
     if (auth.isLogined) {
-      config.headers.Authorization = `Bearer ${auth.userInfo.token?.toString()}`;
+      config.headers.Authorization = auth.userInfo.token?.toString();
     }
 
     return config;
@@ -56,7 +56,14 @@ request.interceptors.response.use(
         //   }
         break;
       case 401:
+        message.error("登录过期");
+        setTimeout(() => {
+          auth.logoutAsync();
+          window.location.href = "/";
+        }, 1000);
+        break;
       case 403:
+        break;
       default:
         message.error(error.response.data.message);
         break;

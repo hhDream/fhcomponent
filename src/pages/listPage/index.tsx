@@ -2,7 +2,7 @@
  * @Description:
  * @Author: Fenghua Zhang
  * @Date: 2021-03-15 11:43:16
- * @LastEditTime: 2021-03-22 16:19:29
+ * @LastEditTime: 2021-03-30 17:21:17
  * @LastEditors: Fenghua Zhang
  */
 import { Table, Modal, Form, Input, InputNumber } from "antd";
@@ -146,6 +146,22 @@ const ListPage: React.FC = () => {
   };
 
   const doDelete = () => {};
+  interface DataType {
+    key: React.Key;
+    name: string;
+    age: number;
+    address: string;
+  }
+
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
+      );
+    },
+  };
   //   载入时获取列表数据
   useEffect(() => {
     getData();
@@ -169,6 +185,10 @@ const ListPage: React.FC = () => {
         删除
       </Button>
       <Table
+        rowSelection={{
+          type: "checkbox",
+          ...rowSelection,
+        }}
         style={{ marginTop: "10px" }}
         dataSource={dataSource}
         columns={columns}
